@@ -45,16 +45,15 @@ class App extends Component {
 
     let res = await axios.put(`${API_URL}/smartphones/${smartphone._id}`, smartphone);
 
-    // console.log(res);
 
-    // let { smartphones } = this.state;
+    let { smartphones } = this.state;
 
-    // smartphones[smartphone._id] = res;
+    smartphones[smartphone._id] = res.data;
 
-    // this.setState({
-    //   ...this.state,
-    //   smartphones
-    // });
+    this.setState({
+      ...this.state,
+      smartphones
+    });
 
     return res.data._id;
 
@@ -85,8 +84,8 @@ class App extends Component {
       <div className="app-content">
         <Route exact path="/" component={(props) => <IndexPage {...props} smartphones={this.state.smartphones} />} />
         <Route exact path="/smartphones/:id" component={(props) => <ShowPage {...props} smartphone={this.state.smartphones[props.match.params.id]}/>}/>
-        <Route exact path="/smartphones/edit/:id" component={(props) => <EditPage {...props} onUpdate={this.handleUpdate} smartphone={this.state.smartphones[props.match.params.id]}/>}/>
-        <Route exact path="/create" component={(props) => <NewPage {...props} onSave={this.handleSave} />} />
+        <Route exact path="/smartphones/edit/:id" component={(props) => <EditPage {...props} onUpdate={this.handleUpdate.bind(this)} smartphone={this.state.smartphones[props.match.params.id]}/>}/>
+        <Route exact path="/create" component={(props) => <NewPage {...props} onSave={this.handleSave.bind(this)} />} />
       </div>
     );
   }
