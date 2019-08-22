@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -7,6 +8,7 @@ const app = express();
 const smartphones = require('./routes/smartphones.routes');
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use('/api/smartphones', smartphones);
 
