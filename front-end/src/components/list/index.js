@@ -14,6 +14,8 @@ export default class SmartList extends Component {
 
     state = {
         smartphones: [],
+        smartphones_ori: [],
+        filter: '',
         loading: true
     }
 
@@ -46,20 +48,52 @@ export default class SmartList extends Component {
         this.setState({
             ...this.state,
             smartphones,
+            smartphones_ori: smartphones,
             loading:false
         });
 
+    }
+
+    findBy = (e) => {
+
+        const filter = e.target.value;
+
+        this.setState({
+            ...this.state,
+            filter
+        });
     }
 
     renderSmartphones() {
 
         const smartphones = Object.values(this.state.smartphones);
 
-        return smartphones.map((n) => 
+        if(this.state.filter !== '') {
+            return smartphones.filter(e => e.modelo.includes(this.state.filter) 
+                                            || e.fabricante.includes(this.state.filter) 
+                                            || e.capacidade_armazenamento.toString().includes(this.state.filter)
+                                            || e.tamanho_tela.toString().includes(this.state.filter) 
+                                            || e.versao_so.includes(this.state.filter) ).map((n) => 
                 <tr key={`smart_${n._id}`}>
                   <td >{n.modelo}</td>
                   <td >{n.fabricante}</td>
                   <td >{n.capacidade_armazenamento}</td>
+                  <td >{n.tamanho_tela}</td>
+                  <td >{n.versao_so}</td>
+                  <td >
+                    <Link className="btn btn-sm btn-info mr-2" to={`/smartphones/${n._id}`}>Info</Link>
+                    <Link className="btn btn-sm btn-primary mr-2" to={`/smartphones/edit/${n._id}`}>Editar</Link>
+                    <button className="btn btn-sm btn-danger" onClick={this.handleDelete.bind(this, n._id)}>Excluir</button>
+                  </td>
+                </tr>
+            );
+        }
+
+        return smartphones.map((n) => 
+                <tr key={`smart_${n._id}`}>
+                  <td >{n.modelo}</td>
+                  <td >{n.fabricante}</td>
+                  <td >{n.capacidade_armazenamento} GB</td>
                   <td >{n.tamanho_tela}</td>
                   <td >{n.versao_so}</td>
                   <td >
@@ -80,21 +114,29 @@ export default class SmartList extends Component {
         }
 
         return (
-            <table className="table">
-              <thead className="thead-dark">
-                <tr>
-                  <th scope="col">Modelo</th>
-                  <th scope="col">Fabricante</th>
-                  <th scope="col">Armazenamento</th>
-                  <th scope="col">Tamanho Tela</th>
-                  <th scope="col">Versao SO</th>
-                  <th scope="col">Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                {this.renderSmartphones()}
-              </tbody>
-            </table>
+            <div>
+                <div className="my-2 row justify-content-center">
+                    <div className="col-md-6">
+                        <input className="form-control" type="text" placeholder="Pesquisar por" onChange={this.findBy.bind(this)} />
+                    </div>  
+                </div>
+                <table className="table">
+                    <thead className="thead-dark">
+                        <tr>
+                        <th scope="col">Modelo</th>
+                        <th scope="col">Fabricante</th>
+                        <th scope="col">Armazenamento</th>
+                        <th scope="col">Tamanho Tela</th>
+                        <th scope="col">Versao SO</th>
+                        <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderSmartphones()}
+                    </tbody>
+                </table>
+            </div>
+            
 
         );
     }

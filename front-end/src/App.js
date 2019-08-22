@@ -71,11 +71,12 @@ class App extends Component {
       ...this.state,
       smartphones
     });
+    
 
     return res.data._id;
 
-
   }
+
 
   renderContent() {
     if(this.state.loading) {

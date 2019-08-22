@@ -47,30 +47,30 @@ export default class NewPage extends Component {
                         <form onSubmit={this.handleSave}>
                             <div className="form-group">
                                 <label>Modelo</label>
-                                <input type="text" className="form-control" name="modelo" value={smartphone.modelo || ''} onChange={this.updateValue}/>
+                                <input type="text" className="form-control" name="modelo" defaultValue={smartphone.modelo || ''} onChange={this.updateValue} required />
                             </div>
                             <div className="form-group">
                                 <label>Fabricante</label>
-                                <input type="text" className="form-control" name="fabricante" value={smartphone.fabricante || ''} onChange={this.updateValue}/>
+                                <input type="text" className="form-control" name="fabricante" defaultValue={smartphone.fabricante || ''} onChange={this.updateValue} required />
                             </div>
                             <div className="form-group">
                                 <label>Armazenamento</label>
-                                <input type="number" className="form-control" name="capacidade_armazenamento" value={smartphone.capacidade_armazenamento || ''} onChange={this.updateValue}/>
+                                <input type="number" className="form-control" name="capacidade_armazenamento" defaultValue={smartphone.capacidade_armazenamento || 0} onChange={this.updateValue} step="0.1" required />
                             </div>
                             <div className="form-group">
                                 <label>Tamanho Tela</label>
-                                <input type="number" className="form-control" name="tamanho_tela" value={smartphone.tamanho_tela || ''} onChange={this.updateValue}/>
+                                <input type="number" className="form-control" name="tamanho_tela" defaultValue={smartphone.tamanho_tela || 0} onChange={this.updateValue} step="0.1" required />
                             </div>
                             <div className="form-group">
                                 <label>Versão SO</label>
-                                <input type="text" className="form-control" name="versao_so" value={smartphone.versao_so || ''} onChange={this.updateValue}/>
+                                <input type="text" className="form-control" name="versao_so" defaultValue={smartphone.versao_so || ''} onChange={this.updateValue} required/>
                             </div>
                         
                             <div className="form-group">
                                 <button className="btn btn-primary mb-2">Cadastrar</button>
                             </div>
                             <div className="form-group">
-                                <Link to="/">Cancel</Link>
+                                <Link to="/">Cancelar</Link>
                             </div>
                         </form>
                     </div>
