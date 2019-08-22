@@ -25,6 +25,7 @@ export default class NewPage extends Component {
     }
 
     handleSave = async (e) => {
+
         e.preventDefault();
 
         const id = await this.props.onSave(this.state.smartphone);
