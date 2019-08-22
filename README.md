@@ -12,6 +12,7 @@
 ### Executar o seguinte comando no terminal
 
 ```
+npm install
 node index.js
 ```
 
@@ -22,6 +23,7 @@ node index.js
 ### Executar o seguinte comando no terminal
 
 ```
+npm install
 npm start
 ```
 
