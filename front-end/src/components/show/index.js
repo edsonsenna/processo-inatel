@@ -5,10 +5,10 @@ import React, { Component } from 'react';
 export default class ShowPage extends Component {
 
     state = {
-        smartphone: null
+        smartphone: {}
     }
 
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
 
         const { smartphone } = this.props;
 
@@ -19,6 +19,14 @@ export default class ShowPage extends Component {
     }
 
     render() {
+
+
+        const { smartphone } = this.props;
+
+        if(!smartphone) {
+            return <h2>Loading...</h2>
+        }
+
         return (
             <div className="container">
                 <div className="row justify-content-center pt-3">

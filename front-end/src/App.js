@@ -63,14 +63,13 @@ class App extends Component {
 
     let res = await axios.post(`${API_URL}/smartphones/`, smartphone);
 
-    let created = res.data;
+    let smartphones = this.state.smartphones;
+
+    smartphones[res.data._id] = res.data;
 
     this.setState({
       ...this.state,
-      smartphones: {
-        ...this.state.smartphones,
-        created
-      }
+      smartphones
     });
 
     return res.data._id;
